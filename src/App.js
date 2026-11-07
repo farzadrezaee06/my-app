@@ -8,7 +8,6 @@ import Toast from './Components/Haeder/Toast';
 
 const MAX_QTY = 10;
 
-// کلیدهای نسخه‌دار: اگه ساختار داده عوض شد، v1 رو به v2 تغییر بده تا داده‌ی قدیمی مشکل نسازه
 const CART_KEY = 'digikala:cart:v1';
 const THEME_KEY = 'digikala:theme:v1';
 

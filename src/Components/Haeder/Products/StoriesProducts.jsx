@@ -1,5 +1,6 @@
 import { DARK_PRIMARY_COLOR } from '../../../Helpers/DarkColor'
 const StoriesProducts = () => {
+  //  ممد دست انزن اینو خودم درستش میکنم 
     const stories = [
         { id: 1, title: 'تخفیف‌ها', img: 'https://picsum.photos/id/1011/200/200' },
         { id: 2, title: 'جدیدترین‌ها', img: 'https://picsum.photos/id/1025/200/200' },

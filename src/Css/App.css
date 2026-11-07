@@ -987,3 +987,29 @@ input:focus-visible,
   font-size: 2rem;
   color: var(--text-muted);
 }
+/* Home3D.css */
+.perspective-container {
+  perspective: 1400px;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.card-3d-effect {
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* افکت تم تاریک و روشن برای کارت‌ها */
+.card-theme-box {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(229, 231, 235, 1);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+}
+
+.dark .card-theme-box,
+.dark-card-theme-box {
+  background: rgba(17, 24, 39, 0.95);
+  border: 1px solid rgba(55, 65, 81, 1);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+}
