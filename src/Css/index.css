@@ -1,0 +1,114 @@
+/* =====================================================================
+   index.css  (استایل‌های پایه و سراسری)
+   فقط ریست، بدنه، دکمه/اینپوت و چیدمان هدر اینجاست.
+   نوبار، سبد خرید، بنر و ... داخل App.css هستن.
+   ===================================================================== */
+
+
+/* ================= ریست ================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ================= صفحه و بدنه ================= */
+html {
+  -webkit-text-size-adjust: 100%;
+  /* مخفی کردن نوار اسکرول صفحه (اسکرول همچنان کار می‌کنه) */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--bg, #17191F);
+  color: var(--text, #F5F5F5);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+
+/* ================= دکمه و اینپوت =================
+   به جای all: unset (که فوکوس و استایل‌های مفید رو هم پاک می‌کرد)،
+   فقط ظاهر پیش‌فرض مرورگر خنثی می‌شه. */
+button,
+input {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+button {
+  text-align: inherit;
+  cursor: pointer;
+}
+
+
+/* ================= چیدمان هدر (قدیمی) =================
+   اگه این کلاس‌ها دیگه هیچ جا استفاده نمی‌شن، کل این بخش رو پاک کن. */
+/* .header {
+  text-align: center;
+}
+
+.header-container {
+  width: 100%;
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: 12px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+} */
+
+/* نسبت ۵۰ / ۲۵ / ۲۵ قبلی، ولی منعطف */
+.search-section {
+  flex: 2 1 0;
+  min-width: 0;
+}
+
+.empty-section {
+  flex: 1 1 0;
+}
+
+.actions-section {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 2vw, 1rem);
+}
+
+.cart-button {
+  cursor: pointer;
+}
+
+/* موبایل: ستون خالی حذف می‌شه تا جستجو جا داشته باشه */
+@media (max-width: 575.98px) {
+  .empty-section {
+    display: none;
+  }
+
+  .search-section {
+    flex: 3 1 0;
+  }
+}

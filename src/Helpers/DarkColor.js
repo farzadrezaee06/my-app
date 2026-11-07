@@ -1,0 +1,13 @@
+export const DARK_BACKGROUND = 'var(--bg)';
+export const DARK_SURFACE = 'var(--surface)';
+export const DARK_SECONDARY_BACKGROUND = 'var(--bg-secondary)';
+export const DARK_TEXT_COLOR = 'var(--text)';
+export const DARK_SECONDARY_TEXT_COLOR = 'var(--text-muted)';
+export const DARK_PRIMARY_COLOR = 'var(--primary)';
+export const DARK_PRIMARY_HOVER = 'var(--primary-hover)';
+export const DARK_BORDER_COLOR = 'var(--border)';
+export const DARK_SUCCESS_COLOR = 'var(--success)';
+export const DARK_ERROR_COLOR = 'var(--error)';
+export const DARK_PRICE_COLOR = 'var(--price)';
+export const DARK_BADGE_BACKGROUND = 'var(--badge-bg)';
+export const DARK_SHADOW_COLOR = 'var(--shadow)';

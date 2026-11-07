@@ -1,0 +1,989 @@
+/* =====================================================================
+   App.css  (نسخه‌ی ریفکتور شده)
+   ترتیب فایل:
+   1) تم‌ها و متغیرها      2) پایه            3) دکمه تغییر تم
+   4) نوبار و لینک‌ها      5) نوار اسکرول      6) سبد خرید
+   7) بنر                  8) استوری‌ها        9) محصولات
+   10) نوتیف               11) کاهش انیمیشن
+   ===================================================================== */
+
+
+/* ================= ۱) تم‌ها و متغیرها ================= */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #17191F;
+  --surface: #22252D;
+  --bg-secondary: #2B2F39;
+  --text: #F5F5F5;
+  --text-muted: #B0B4C0;
+  --primary: #FF5267;
+  --primary-hover: #FF7182;
+  --accent-2: #FF9A3C;
+  --primary-glow: rgba(255, 82, 103, 0.45);
+  --border: #393D48;
+  --success: #66BB6A;
+  --error: #FF6B6B;
+  --price: #FF7182;
+  --badge-bg: #3A252D;
+  --shadow: rgba(0, 0, 0, 0.25);
+  --shadow-strong: rgba(0, 0, 0, 0.55);
+  --backdrop: rgba(0, 0, 0, 0.55);
+  --btn-bg: #22252D;
+  --inset-shadow: #74777c;
+  --input-bg: #FFFFFF;
+  --input-text: #000000;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #F3F4F8;
+  --surface: #FFFFFF;
+  --bg-secondary: #FFFFFF;
+  --text: #212121;
+  --text-muted: #757575;
+  --primary: #EF394E;
+  --primary-hover: #D92D42;
+  --accent-2: #FF8A4C;
+  --primary-glow: rgba(239, 57, 78, 0.35);
+  --border: #E3E5EC;
+  --success: #2E7D32;
+  --error: #D32F2F;
+  --price: #D32F2F;
+  --badge-bg: #FFF0F1;
+  --shadow: rgba(30, 40, 90, 0.10);
+  --shadow-strong: rgba(30, 40, 90, 0.22);
+  --backdrop: rgba(20, 24, 40, 0.35);
+  --btn-bg: #EEF0F6;
+  --inset-shadow: rgba(30, 40, 90, 0.18);
+  --input-bg: #F3F4F8;
+  --input-text: #212121;
+}
+
+/* متغیرهای ابعاد (روی همه‌ی سایزها ریسپانسیو هستن) */
+:root {
+  --nav-h: 60px;
+  --radius: 12px;
+  --radius-sm: 8px;
+
+  /* استوری‌ها و مارکی‌ها */
+  --story-size: clamp(60px, 13vw, 86px);
+  --marquee-gap: clamp(12px, 3vw, 28px);
+
+  /* انیمیشن‌ها */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* ================= ۲) پایه ================= */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* فوکوس کیبورد برای همه‌ی دکمه‌ها و لینک‌ها */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+.btn-mod:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.fade-in {
+  animation: appearAnim 0.3s ease-out forwards;
+}
+
+@keyframes appearAnim {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* ================= ۳) دکمه‌ی تغییر تم (btn-mod) ================= */
+.btn-mod {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 50px;
+  height: 30px;
+  border-radius: 100px;
+  background-color: var(--btn-bg);
+  color: var(--primary);
+  border: 1px solid var(--border);
+  box-shadow: inset 0.5px 0.5px 10px var(--inset-shadow);
+  cursor: pointer;
+  transition: background-color 0.4s ease, transform 0.2s ease;
+}
+
+.btn-mod:active {
+  transform: scale(0.94);
+}
+
+.btn-mod i {
+  display: block;
+  line-height: 1;
+  margin: 0;
+  font-size: 15px;
+}
+
+.btn-mod.btn-mod-sm {
+  width: 32px;
+  height: 22px;
+  box-shadow: inset 0.5px 0.5px 6px var(--inset-shadow);
+}
+
+@media (max-width: 575.98px) {
+  .btn-mod {
+    width: 38px;
+    height: 26px;
+    box-shadow: inset 0.5px 0.5px 6px var(--inset-shadow);
+  }
+
+  .btn-mod i {
+    font-size: 0.8rem;
+  }
+}
+
+
+/* ================= ۴) لینک‌های نوبار ================= */
+.nav-link-fancy {
+  position: relative;
+  padding: 6px 12px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 6px;
+  transition: transform 0.3s ease, text-shadow 0.3s ease, color 0.3s ease;
+}
+
+.nav-link-fancy::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+  transform: translateX(-50%);
+  transition: width 0.4s var(--ease-out);
+}
+
+.nav-link-fancy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, currentColor 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: -1;
+}
+
+.nav-link-fancy:active {
+  transform: translateY(0) scale(0.95);
+}
+
+/* افکت هاور فقط روی دستگاه‌هایی که موس دارن (روی موبایل گیر نمی‌کنه) */
+@media (hover: hover) and (pointer: fine) {
+  .nav-link-fancy:hover {
+    transform: translateY(-3px);
+    text-shadow: 0 0 8px var(--primary-glow);
+  }
+
+  .nav-link-fancy:hover::after {
+    width: 100%;
+  }
+
+  .nav-link-fancy:hover::before {
+    opacity: 0.15;
+    transform: scale(1.2);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .nav-link-fancy {
+    padding: 4px 6px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .nav-links-wrapper {
+    display: none !important;
+  }
+}
+
+
+/* ================= ۵) نوار پیشرفت اسکرول ================= */
+.scroll-progress {
+  position: absolute;
+  bottom: -1px;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(270deg, var(--primary), var(--accent-2));
+  box-shadow: 0 0 8px var(--primary-glow);
+  border-radius: 0 3px 3px 0;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+
+/* ================= ۶) سبد خرید کشویی =================
+   نکته: عرض، ارتفاع، بوردر و رنگ پس‌زمینه‌ی پنل از CSS میاد.
+   پس توی ShoppingCart.jsx پراپ style رو از div.cart-panel پاک کن. */
+.cart-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1040;
+  background: var(--backdrop);
+  backdrop-filter: blur(3px);
+  animation: cartBackdropIn 0.35s ease both;
+}
+
+.cart-panel {
+  position: fixed;
+  top: calc(var(--nav-h) + 12px);
+  right: 0;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  width: min(340px, 92vw);
+  height: calc(100vh - var(--nav-h) - 24px);
+  height: calc(100dvh - var(--nav-h) - 24px);
+  max-height: 640px;
+  overflow: hidden;
+  color: var(--text);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-right: 0;
+  border-radius: var(--radius) 0 0 var(--radius);
+  box-shadow: -12px 0 40px var(--shadow-strong);
+  animation: cartSlideIn 0.55s var(--ease-out) both;
+}
+
+.cart-panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, var(--primary), transparent);
+  opacity: 0.8;
+  animation: cartGlow 2.5s ease-in-out infinite alternate;
+}
+
+.shopping-cart-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  animation: cartItemUp 0.5s ease 0.25s both;
+}
+
+.shopping-cart-heading {
+  flex-shrink: 0;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.shopping-cart-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.shopping-cart-text {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--primary);
+}
+
+/* آیتم‌های سبد: بخش میانی که خودش اسکرول می‌خوره */
+.cart-item-title {
+  unicode-bidi: plaintext;
+}
+
+.cart-items {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 10px 14px;
+  overscroll-behavior: contain;
+}
+
+.cart-empty {
+  text-align: center;
+  color: var(--text-muted);
+  margin-top: 30px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  animation: cartItemUp 0.4s ease both;
+}
+
+.cart-item-img {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.cart-item-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cart-item-title {
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cart-item-info small {
+  color: var(--price);
+}
+
+.cart-item-remove {
+  min-width: 36px;
+  min-height: 36px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.cart-item-remove:hover {
+  color: var(--error);
+}
+
+/* جمع کل: ته پنل می‌چسبه (بدون position: absolute) */
+.cart-total {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  color: var(--text);
+}
+
+.cart-total strong {
+  color: var(--price);
+}
+
+@keyframes cartSlideIn {
+  from {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes cartBackdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes cartItemUp {
+  from {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes cartGlow {
+  from {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* موبایل: سبد تمام‌صفحه */
+@media (max-width: 575.98px) {
+  .cart-panel {
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-height: none;
+    border: 0;
+    border-radius: 0;
+  }
+}
+
+
+/* ================= ۷) بنر تبلیغاتی ================= */
+.banner-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  max-height: 420px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px var(--shadow-strong);
+}
+
+.banner-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 0.9s ease, transform 5s ease-out;
+}
+
+.banner-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.banner-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.banner-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: none;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: width 0.4s ease, background 0.4s ease;
+}
+
+.banner-dot.active {
+  width: 28px;
+  background: #fff;
+}
+
+/* بردر چرخان دور بنر */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.banner-border {
+  padding: 3px;
+  background: conic-gradient(from var(--border-angle),
+      transparent 0deg,
+      var(--primary) 60deg,
+      var(--primary-hover) 90deg,
+      transparent 150deg,
+      transparent 360deg);
+  animation: borderSpin 3s linear infinite;
+  box-shadow: 0 0 18px var(--primary-glow);
+}
+
+.banner-border .banner-slider {
+  border-radius: calc(0.375rem - 3px);
+}
+
+@keyframes borderSpin {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+/* تبلت */
+@media (max-width: 991.98px) {
+  .banner-slider {
+    aspect-ratio: 5 / 2;
+  }
+}
+
+/* موبایل */
+@media (max-width: 575.98px) {
+  .banner-slider {
+    aspect-ratio: 16 / 9;
+  }
+
+  .banner-dots {
+    bottom: 8px;
+    gap: 6px;
+  }
+
+  .banner-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .banner-dot.active {
+    width: 22px;
+  }
+}
+
+/* موبایل خیلی کوچک */
+@media (max-width: 359.98px) {
+  .banner-slider {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+
+/* ================= ۸) استوری‌ها و مارکی‌ها =================
+   یک انیمیشن مشترک برای هر دو (استوری‌ها و Products-marquee).
+   فاصله‌ی بین آیتم‌ها از --marquee-gap میاد، پس برای هر سایزی درست حساب می‌شه. */
+.stories-marquee,
+.Products-marquee {
+  overflow: hidden;
+  direction: ltr;
+  padding: 6px 0 10px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.stories-track,
+.Products-track {
+  display: flex;
+  gap: var(--marquee-gap);
+  width: max-content;
+  animation: marqueeScroll 40s linear infinite;
+}
+
+.Products-track {
+  animation-duration: 60s;
+}
+
+.stories-marquee:hover .stories-track,
+.Products-marquee:hover .Products-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - var(--marquee-gap) / 2));
+  }
+}
+
+.story-item {
+  flex: 0 0 auto;
+  width: calc(var(--story-size) + 6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: default;
+}
+
+.story-ring {
+  width: var(--story-size);
+  height: var(--story-size);
+  padding: 3px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--primary), var(--primary-hover), var(--accent-2));
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.story-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--bg);
+  box-sizing: border-box;
+}
+
+.story-title {
+  max-width: 100%;
+  font-size: clamp(0.7rem, 0.62rem + 0.3vw, 0.85rem);
+  color: var(--text);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ================= ۹) محصولات ================= */
+.products-heading {
+  margin-bottom: 16px;
+  font-size: clamp(1.1rem, 0.95rem + 0.8vw, 1.5rem);
+  font-weight: 800;
+  color: var(--text);
+  /* جهت‌محور: توی RTL سمت راست، توی LTR سمت چپ */
+  padding-inline-start: 10px;
+  border-inline-start: 4px solid var(--primary);
+}
+
+.product-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 0 50px var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.4s ease;
+}
+
+.product-img-wrap {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: clamp(8px, 2vw, 14px);
+}
+
+.product-title {
+  margin: 0;
+  min-height: 2.6em;
+  font-size: clamp(0.82rem, 0.74rem + 0.4vw, 1rem);
+  font-weight: 700;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-price {
+  margin-top: auto;
+  font-size: clamp(0.9rem, 0.82rem + 0.35vw, 1.05rem);
+  font-weight: 800;
+  color: var(--price);
+}
+
+.product-price small {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 0.75rem;
+}
+
+/* دکمه‌ی افزودن به سبد:
+   وسط کارت با عرض کمتر می‌شینه و موقع هاور تا تمام عرض باز می‌شه.
+   روی دستگاه‌های لمسی و موبایل از اول تمام عرضه (به جای ده‌ها media query). */
+.product-btn {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 62%;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(45deg, var(--primary), var(--primary-hover));
+  color: #fff;
+  font-size: clamp(0.72rem, 0.64rem + 0.4vw, 0.95rem);
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: width 0.45s var(--ease-out), box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.product-btn:active {
+  transform: scale(0.96);
+}
+
+.product-btn.products-retry {
+  width: auto;
+  padding-inline: 24px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--primary);
+    box-shadow: 0 0 18px var(--primary-glow);
+  }
+
+  .product-card:hover .product-img {
+    transform: scale(1.08);
+  }
+
+  .product-btn:hover {
+    width: 100%;
+    box-shadow: 0 0 14px var(--primary-glow);
+  }
+}
+
+@media (hover: none),
+(max-width: 575.98px) {
+  .product-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 359.98px) {
+  .product-btn {
+    gap: 5px;
+    padding-inline: 8px;
+  }
+}
+
+/* حالت‌های لودینگ و خطا */
+.products-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 60px 0;
+  color: var(--text-muted);
+}
+
+.products-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: productsSpin 0.8s linear infinite;
+}
+
+@keyframes productsSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ================= ۱۰) نوتیف ================= */
+.toast-box {
+  position: fixed;
+  top: calc(var(--nav-h) + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  min-width: min(260px, 92vw);
+  max-width: min(420px, 92vw);
+  padding: 12px 16px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: clamp(0.8rem, 0.74rem + 0.3vw, 0.9rem);
+  font-weight: 700;
+  box-shadow: 0 10px 30px var(--shadow-strong);
+  animation: toastIn 0.45s var(--ease-out) both;
+}
+
+.toast-success {
+  border: 1px solid var(--success);
+}
+
+.toast-success>i:first-child {
+  color: var(--success);
+  font-size: 1.2rem;
+}
+
+.toast-error {
+  border: 1px solid var(--error);
+}
+
+.toast-error>i:first-child {
+  color: var(--error);
+  font-size: 1.2rem;
+}
+
+.toast-close {
+  margin-inline-start: auto;
+  min-width: 28px;
+  min-height: 28px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.toast-timer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 3px;
+  width: 100%;
+  background: currentColor;
+  animation: toastTimer 3s linear forwards;
+}
+
+.toast-success .toast-timer {
+  color: var(--success);
+}
+
+.toast-error .toast-timer {
+  color: var(--error);
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+@keyframes toastTimer {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0;
+  }
+}
+
+
+/* ================= ۱۱) کاهش انیمیشن (برای کاربرانی که خاموش کردن) ================= */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* مارکی‌ها ثابت می‌شن و با اسکرول دستی قابل مشاهده‌ان */
+  .stories-track,
+  .Products-track {
+    animation: none !important;
+  }
+
+  .stories-marquee,
+  .Products-marquee {
+    overflow-x: auto;
+  }
+
+  .banner-border {
+    animation: none !important;
+    background: var(--primary);
+  }
+}
+
+/* ================= جستجو ================= */
+.search-box {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 400px;
+}
+
+.search-box input::placeholder {
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+/* دکمه‌ی ضربدر خود مرورگر مخفی می‌شه، چون دکمه‌ی خودمون رو داریم */
+.search-box input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search-clear {
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--input-text);
+  opacity: 0.6;
+  font-size: 0.8rem;
+  transition: opacity 0.2s ease;
+}
+
+.search-clear:hover {
+  opacity: 1;
+}
+
+.products-count {
+  margin: -8px 0 16px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.products-state-icon {
+  font-size: 2rem;
+  color: var(--text-muted);
+}
