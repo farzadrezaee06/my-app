@@ -8,9 +8,9 @@ import '../../../Css/App.css';
 
 // فعلاً هر سه به /products می‌رن؛ وقتی صفحه‌هاشون ساخته شد، فقط مقدار to رو عوض کن
 const NAV_LINKS = [
-    { to: '/products', label: 'تخفیف‌ها' },
+    { to: '/discounts', label: 'تخفیف‌ها' },
     { to: '/products', label: 'رویدادها' },
-    { to: '/products', label: 'سفارشات ویژه' },
+    { to: '/special-orders', label: 'سفارشات ویژه' },
 ];
 
 const ProductsNavbar = () => {
