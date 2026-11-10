@@ -3,6 +3,7 @@ import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import { CreateContext } from "./Context/contaxt";
 import useLocalStorage from "./Hooks/useLocalStorage";
 import Products from "./Components/Haeder/Products/Products";
+import Events from "./Components/Haeder/Products/Events";
 import Home from "./Components/Home/Home";
 import Toast from "./Components/Haeder/Toast";
 import SpecialOrders from "./Components/Haeder/Products/SpecialOrders";
@@ -154,6 +155,7 @@ const App = () => {
               element={<Products key="discounts" onlyDiscount />}
             />
             <Route path="/special-orders" element={<SpecialOrders />} />
+            <Route path="/events" element={<Events />} />
             <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
         </CreateContext.Provider>

@@ -1,18 +1,34 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { CreateContext } from "../../../Context/contaxt";
 import { DARK_PRIMARY_COLOR, DARK_SECONDARY_BACKGROUND, DARK_BORDER_COLOR } from "../../../Helpers/DarkColor";
 import "../../../Css/App.css";
 
 const SpecialOrders = () => {
-    const { tem, setToast } = useContext(CreateContext);
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    // loading و setLoading اضافه شدند
+    const { tem, setToast, loading, setLoading } = useContext(CreateContext);
 
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
         fullName: "",
         phone: "",
         company: "",
         description: "",
     });
+
+    // اضافه شدن منطق لودینگ اولیه صفحه (مثلاً ۲.۵ ثانیه)
+    useEffect(() => {
+        setLoading(true);
+
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 800);
+
+        // تابع پاکسازی (اگر کاربر قبل از اتمام تایمر از صفحه خارج شد)
+        return () => {
+            clearTimeout(timer);
+            setLoading(false);
+        };
+    }, [setLoading]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,7 +38,6 @@ const SpecialOrders = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // اعتبارسنجی ساده
         if (!formData.fullName || !formData.phone || !formData.description) {
             setToast({
                 type: "error",
@@ -34,7 +49,6 @@ const SpecialOrders = () => {
 
         setIsSubmitting(true);
 
-        // شبیه‌سازی ارسال اطلاعات به سرور
         setTimeout(() => {
             setToast({
                 type: "success",
@@ -46,7 +60,6 @@ const SpecialOrders = () => {
         }, 1500);
     };
 
-    // استایل‌های متغیر بر اساس تم
     const inputStyle = {
         backgroundColor: tem ? "#fff" : DARK_SECONDARY_BACKGROUND,
         color: tem ? "#333" : "#fff",
@@ -58,12 +71,33 @@ const SpecialOrders = () => {
         transition: "border-color 0.3s ease"
     };
 
+    // اگر صفحه در وضعیت لودینگ است، این بخش (اسپینر) نمایش داده می‌شود
+    if (loading) {
+        return (
+            <div className="d-flex flex-column justify-content-center align-items-center" style={{ minHeight: "70vh" }}>
+                <div
+                    className="spinner-border"
+                    style={{ width: "4rem", height: "4rem", color: "#ef394e" }}
+                    role="status"
+                >
+                    <span className="visually-hidden">در حال بارگذاری...</span>
+                </div>
+                <h5 className="mt-4 fw-bold" style={{ color: tem ? "#333" : "#fff", letterSpacing: "1px" }}>
+                    در حال بارگذاری فرم سفارشات...
+                </h5>
+                <p className="mt-2 text-muted" style={{ fontSize: "0.9rem" }}>
+                    لطفاً چند لحظه صبر کنید
+                </p>
+            </div>
+        );
+    }
+
+    // محتوای اصلی که بعد از اتمام لودینگ نمایش داده می‌شود
     return (
         <section className="container mt-5 mb-5">
             <div className="row justify-content-center">
                 <div className="col-12 col-lg-8">
 
-                    {/* هدر بخش سفارشات ویژه */}
                     <div className="text-center mb-5">
                         <i className="fa-solid fa-handshake-angle mb-3" style={{ fontSize: "3rem", color: "#ef394e" }}></i>
                         <h2 style={{ color: tem ? "#333" : DARK_PRIMARY_COLOR, fontWeight: "bold" }}>
@@ -75,7 +109,6 @@ const SpecialOrders = () => {
                         </p>
                     </div>
 
-                    {/* فرم ثبت درخواست */}
                     <div
                         className="p-4 p-md-5 shadow-sm rounded"
                         style={{
@@ -167,7 +200,6 @@ const SpecialOrders = () => {
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </section>
