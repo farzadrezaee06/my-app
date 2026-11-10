@@ -5,7 +5,7 @@ import useLocalStorage from "./Hooks/useLocalStorage";
 import Products from "./Components/Haeder/Products/Products";
 import Home from "./Components/Home/Home";
 import Toast from "./Components/Haeder/Toast";
-
+import SpecialOrders from "./Components/Haeder/Products/SpecialOrders";
 const MAX_QTY = 10;
 
 // کلیدهای نسخه‌دار: اگه ساختار داده عوض شد، v1 رو به v2 تغییر بده تا داده‌ی قدیمی مشکل نسازه
@@ -153,6 +153,7 @@ const App = () => {
               path="/discounts"
               element={<Products key="discounts" onlyDiscount />}
             />
+            <Route path="/special-orders" element={<SpecialOrders />} />
             <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
         </CreateContext.Provider>

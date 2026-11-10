@@ -177,6 +177,8 @@ const buildFallbackTitle = (product, index) => {
 
 const formatPrice = (price) => price.toLocaleString("fa-IR");
 
+
+
 // یکسان‌سازی متن برای جستجو:
 // حروف عربی به فارسی، حذف نیم‌فاصله (تا «لپتاپ» و «لپ‌تاپ» یکی باشن)، بزرگ/کوچک
 const normalize = (text) =>
@@ -364,6 +366,7 @@ const Products = ({ onlyDiscount = false }) => {
         return () => controller.abort();
     }, [fetchProducts]);
 
+
     return (
 
         <>
@@ -486,5 +489,6 @@ const Products = ({ onlyDiscount = false }) => {
 
 
     );
+
 };
 export default Products;
